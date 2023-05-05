@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Oppskrifter
 {
@@ -6,7 +8,9 @@ namespace Oppskrifter
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Oppskrifter oppskrifter = new Oppskrifter();
+
+            oppskrifter.FinnOppskrifterMedIngrediens("Mel");
         }
     }
 }
