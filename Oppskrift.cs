@@ -13,7 +13,8 @@ namespace Oppskrifter
         private Ingrediens[] _ingredienser;
         private List<string> _instruksjoner;
 
-        public Oppskrift(string navn, List<string> instruksjoner, params Ingrediens[] ingredienser) { 
+        public Oppskrift(string navn, List<string> instruksjoner, params Ingrediens[] ingredienser)
+        {
             _navn = navn;
             _ingredienser = ingredienser;
             _instruksjoner = instruksjoner;
@@ -21,30 +22,28 @@ namespace Oppskrifter
 
         public void VisOppskrift()
         {
-            Console.WriteLine();
-            Console.WriteLine("-------------------------------------------------------");
+            Console.WriteLine("\n-------------------------------------------------------");
 
             Console.WriteLine(_navn);
             Console.WriteLine();
             Console.WriteLine("Ingredienser:");
-            foreach(Ingrediens ingrediens in _ingredienser)
+            foreach (var ingrediens in _ingredienser)
             {
                 ingrediens.VisIngrediens();
             }
-            for(int i = 0; i < _instruksjoner.Count; i++)
+            for (int i = 0; i < _instruksjoner.Count; i++)
             {
-                Console.WriteLine($"\n{i+1}: {_instruksjoner[i]}");
+                Console.WriteLine($"\n{i + 1}: {_instruksjoner[i]}");
             }
 
-            Console.WriteLine("-------------------------------------------------------");
-            Console.WriteLine();
+            Console.WriteLine("-------------------------------------------------------\n");
         }
 
-        public bool FinnIngrediens(string navn)
+        public bool HarIngrediens(string navn)
         {
-            foreach(Ingrediens ingrediens in _ingredienser)
+            foreach (var ingrediens in _ingredienser)
             {
-                if(ingrediens.MatcherNavn(navn))
+                if (ingrediens.MatcherNavn(navn))
                 {
                     return true;
                 }
@@ -52,35 +51,20 @@ namespace Oppskrifter
             return false;
         }
 
+        public List<String> HentIngrediensNavn()
+        {
+
+            return _ingredienser.Select(i => i.Navn).ToList();
+
+        }
+
         public bool InneholderAlleIngredienser(string[] ingredienserSomSkalSjekkes)
         {
-            List<String> ingredienser = new List<String>();
+            List<String> ingrediensNavn = HentIngrediensNavn();
 
-            foreach(Ingrediens ingrediens in _ingredienser)
-            {
-                ingredienser.Add(ingrediens.Navn);
-            }
+            var inneholderIngredienser = ingrediensNavn.All(i => ingredienserSomSkalSjekkes.Contains(i));
 
-            foreach(string ingrediens in ingredienser)
-            {
-                bool inneholderIngrediens = false;
-
-                foreach(string andreIngrediens in ingredienserSomSkalSjekkes)
-                {
-                    if(andreIngrediens == ingrediens)
-                    {
-                        inneholderIngrediens = true;
-                        break;
-                    }
-                }
-
-                if(!inneholderIngrediens)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return inneholderIngredienser;
         }
     }
 }

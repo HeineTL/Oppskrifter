@@ -65,15 +65,15 @@ namespace Oppskrifter
         {
             List<Oppskrift> oppskrifterMedIngrediens = new List<Oppskrift>();
 
-            foreach (Oppskrift oppskrift in _oppskrifter)
+            foreach (var oppskrift in _oppskrifter)
             {
-                if(oppskrift.FinnIngrediens(ingrediensNavn))
+                if (oppskrift.HarIngrediens(ingrediensNavn))
                 {
                     oppskrifterMedIngrediens.Add(oppskrift);
                 }
             }
 
-            foreach(Oppskrift oppskrift in oppskrifterMedIngrediens)
+            foreach (var oppskrift in oppskrifterMedIngrediens)
             {
                 oppskrift.VisOppskrift();
             }
@@ -83,16 +83,16 @@ namespace Oppskrifter
         {
             List<Oppskrift> oppskrifterManKanLage = new List<Oppskrift>();
 
-            foreach(Oppskrift oppskrift in _oppskrifter)
+            foreach (var oppskrift in _oppskrifter)
             {
                 //Finn ut om alle oppskriftene stemmer, sjekk i Oppskrift.cs
-                if(oppskrift.InneholderAlleIngredienser(ingredienser))
+                if (oppskrift.InneholderAlleIngredienser(ingredienser))
                 {
                     oppskrifterManKanLage.Add(oppskrift);
                 }
             }
 
-            foreach(Oppskrift oppskrift in oppskrifterManKanLage)
+            foreach (var oppskrift in oppskrifterManKanLage)
             {
                 oppskrift.VisOppskrift();
             }
