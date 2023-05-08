@@ -32,5 +32,7 @@ namespace Oppskrifter
             }
             return false;
         }
+
+        public string Navn => _navn;
     }
 }

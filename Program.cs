@@ -10,7 +10,13 @@ namespace Oppskrifter
         {
             Oppskrifter oppskrifter = new Oppskrifter();
 
-            oppskrifter.FinnOppskrifterMedIngrediens("Mel");
+            //viser pannekaker og omelett
+            oppskrifter.FinnOppskrifterManKanLage("Egg", "Smør", "Salt", "Mel", "Sukker", "Melk");
+
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n");
+
+            //viser kun hveteboller
+            oppskrifter.FinnOppskrifterMedIngrediens("Gjær");
         }
     }
 }

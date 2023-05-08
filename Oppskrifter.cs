@@ -43,7 +43,7 @@ namespace Oppskrifter
                 "Hveteboller",
                 new List<string> {
                     "Ha mel, sukker, gjær, salt, kardemomme og egg i en bolle. Legg salt og gjær på hver sin side i bollen. Tilsett temperert melk og elt deigen godt sammen.",
-                    "Tilsett romptemerert smør i biter og elt videre i 2-3 minutter på lav hastighet. Øk hastigheten og elt i ca. 5 minutter til.",
+                    "Tilsett romptemperert smør i biter og elt videre i 2-3 minutter på lav hastighet. Øk hastigheten og elt i ca. 5 minutter til.",
                     "Dekk bollen med håndkle eller plast, og la deigen heve 30-40 minutter til dobbel størrelse.",
                     "Sett ovnen på 210 °C. Hell deigen ut på et melet bord. Del i emner og rull til boller.",
                     "Legg bollene med god avstand på et stekebrett dekket med bakepapir og la etterheve til dobbel størrelse, 10-20 minutter. Pensle med lettpisket egg og stek gylne i ovnen i 10-15 minutter. Avkjøl på rist."
@@ -53,7 +53,6 @@ namespace Oppskrifter
                 new Ingrediens("Sukker", 2, "dl"),
                 new Ingrediens("Gjær", 50, "g"),
                 new Ingrediens("Salt", 1, "ts"),
-                new Ingrediens("Kardemomme", 3, "ts"),
                 new Ingrediens("Egg", 1, "stk"),
                 new Ingrediens("Melk", 6, "dl"),
                 new Ingrediens("Smør", 150, "g")
@@ -68,13 +67,32 @@ namespace Oppskrifter
 
             foreach (Oppskrift oppskrift in _oppskrifter)
             {
-                if(oppskrift.FinnIngrediens(ingrediensNavn) != null)
+                if(oppskrift.FinnIngrediens(ingrediensNavn))
                 {
                     oppskrifterMedIngrediens.Add(oppskrift);
                 }
             }
 
             foreach(Oppskrift oppskrift in oppskrifterMedIngrediens)
+            {
+                oppskrift.VisOppskrift();
+            }
+        }
+
+        public void FinnOppskrifterManKanLage(params string[] ingredienser)
+        {
+            List<Oppskrift> oppskrifterManKanLage = new List<Oppskrift>();
+
+            foreach(Oppskrift oppskrift in _oppskrifter)
+            {
+                //Finn ut om alle oppskriftene stemmer, sjekk i Oppskrift.cs
+                if(oppskrift.InneholderAlleIngredienser(ingredienser))
+                {
+                    oppskrifterManKanLage.Add(oppskrift);
+                }
+            }
+
+            foreach(Oppskrift oppskrift in oppskrifterManKanLage)
             {
                 oppskrift.VisOppskrift();
             }

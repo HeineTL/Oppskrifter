@@ -33,24 +33,54 @@ namespace Oppskrifter
             }
             for(int i = 0; i < _instruksjoner.Count; i++)
             {
-                Console.WriteLine();
-                Console.WriteLine(i + " - " + _instruksjoner[i]);
+                Console.WriteLine($"\n{i+1}: {_instruksjoner[i]}");
             }
 
             Console.WriteLine("-------------------------------------------------------");
             Console.WriteLine();
         }
 
-        public Oppskrift FinnIngrediens(string navn)
+        public bool FinnIngrediens(string navn)
         {
             foreach(Ingrediens ingrediens in _ingredienser)
             {
                 if(ingrediens.MatcherNavn(navn))
                 {
-                    return this;
+                    return true;
                 }
             }
-            return null;
+            return false;
+        }
+
+        public bool InneholderAlleIngredienser(string[] ingredienserSomSkalSjekkes)
+        {
+            List<String> ingredienser = new List<String>();
+
+            foreach(Ingrediens ingrediens in _ingredienser)
+            {
+                ingredienser.Add(ingrediens.Navn);
+            }
+
+            foreach(string ingrediens in ingredienser)
+            {
+                bool inneholderIngrediens = false;
+
+                foreach(string andreIngrediens in ingredienserSomSkalSjekkes)
+                {
+                    if(andreIngrediens == ingrediens)
+                    {
+                        inneholderIngrediens = true;
+                        break;
+                    }
+                }
+
+                if(!inneholderIngrediens)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
